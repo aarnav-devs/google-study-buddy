@@ -4,6 +4,9 @@ const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? '').trim().replace(/\
 
 export function apiUrl(path: string): string {
   const route = path.startsWith('/') ? path : `/${path}`;
+  const useLocalDevelopmentApi = import.meta.env.DEV && !Capacitor.isNativePlatform();
+
+  if (useLocalDevelopmentApi) return route;
 
   if (API_BASE_URL) {
     if (Capacitor.isNativePlatform() && import.meta.env.PROD) {
