@@ -1,0 +1,6 @@
+{
+  "name": "Google Study Buddy",
+  "description": "An adaptive, friendly study buddy that guides students through Maths, Science, English, and Social Studies with hints, visual and story explanations, step-by-step thinking, and interactive mini checks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
