@@ -173,7 +173,17 @@ export default function App() {
       });
 
       if (!res.ok) {
-        throw new Error('API returned error');
+        let errorMessage = `Chat API returned HTTP ${res.status}`;
+        const errorData: unknown = await res.json().catch(() => null);
+        if (
+          errorData &&
+          typeof errorData === 'object' &&
+          'error' in errorData &&
+          typeof errorData.error === 'string'
+        ) {
+          errorMessage += `: ${errorData.error}`;
+        }
+        throw new Error(errorMessage);
       }
 
       const data = await res.json();
