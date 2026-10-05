@@ -535,4 +535,8 @@ async function startServer() {
   startOnPort(PORT);
 }
 
-startServer();
+export default app;
+
+if (!process.env.VERCEL) {
+  startServer();
+}

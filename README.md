@@ -1,38 +1,19 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Google Study Buddy
 
-## Run Locally
+A student learning assistant built with React, TypeScript, and Vite. An Express
+backend serves the website and connects chat to Gemini; the API key stays on
+the server. The Android app packages the same web app using Capacitor.
 
-**Prerequisites:**  Node.js
+## Run locally
 
+Install dependencies with `npm install`, add `GEMINI_API_KEY=your-key` to
+`.env.local`, then run `npm run dev`.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Deploy and build
 
-## Deploy to Railway
+For Vercel, import the repository and add `GEMINI_API_KEY` in **Project
+Settings → Environment Variables**, then deploy. Vercel builds the website and
+serves the Express API as a serverless function.
 
-In the Railway service's **Variables** settings, add `GEMINI_API_KEY` with a valid
-Gemini API key, then redeploy the service. `.env.local` is intentionally not
-committed, so its local key is not available to Railway. Do not name the variable
-`VITE_GEMINI_API_KEY`; that would expose the key in the browser bundle.
-
-That's the only required app variable: Railway provides `PORT`, and the Gemini
-model defaults to `gemini-2.5-flash`. Check the Railway deployment logs if chat
-still returns generic fallback replies: a missing-key warning means the service
-variable is absent, while a "Gemini API call failed" message indicates the key,
-model, or Gemini API request needs attention.
-
-## Android
-
-Capacitor packages the Vite `dist` build. Before building Android, set `VITE_API_BASE_URL` in `.env.local` to the deployed HTTPS URL for this app's Express backend. Keep `GEMINI_API_KEY` server-side; it must not use a `VITE_` prefix. Configure the backend's `CORS_ORIGINS` with `https://localhost` for the Capacitor Android origin and any hosted web origins that need access.
-
-Then run:
-
-1. `npm install`
-2. `npm run android`
-
-Android Studio opens the generated `android` project. To create a signed APK or AAB, use **Build > Generate Signed Bundle / APK** in Android Studio and select APK or Android App Bundle.
+To build and open the Android app, set `VITE_API_BASE_URL` in `.env.local` to
+your Vercel URL, then run `npm run android`.
